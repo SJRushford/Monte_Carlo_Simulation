@@ -1,5 +1,5 @@
 # basic parameters
-unit_cost <- 1.5 # unit variable cost per unit 
+unit_cost <- 1.5 # per unit variable cost 
 unit_price <- 4 # unit price per item
 unit_disp <- 0.20 # cost for the disposal of unsold inventories
 
@@ -45,17 +45,20 @@ t_off <- c(t1, t2, t3)
 
 # risk analysis
 risk_analysis <- data.frame(profit, risk, t_off)
-row.names(risk_analysis) <- c("Profit", "Risk", "Risk/Return Trade Off")
-colnames(risk_analysis) <- c("20K", "40K", "60K")
+colnames(risk_analysis) <- c("Profit", "Risk", "Trade Off")
+row.names(risk_analysis) <- c("20K", "40K", "60K")
 
 # Print the risk analysis profile for all our production quantity
+print('Risk analysis to find optimum production quantity based on Risk Return Trade Off')
 print(risk_analysis)
 
 # Confidence Interval at 95% confidence level
-upper_limit <- risk_analysis[2,2]+1.96*risk_analysis[2,2]/sqrt(1000)
-lower_limit <- risk_analysis[2,2]-1.96*risk_analysis[2,2]/sqrt(1000)
+lower_limit <- risk_analysis[2,1]-1.96*risk_analysis[2,2]/sqrt(1000)
+upper_limit <- risk_analysis[2,1]+1.96*risk_analysis[2,2]/sqrt(1000)
 
 # print the findings
-print('At 95% Confidence Interval: For production of 40K units')
+print('At 95% Confidence Interval: Profit on production of 40K units')
 print(paste("Lower Bound: ", sep = ": ", round(lower_limit, digits = 2)))
 print(paste("Upper Bound", sep = ": ", round(upper_limit, digits = 2)))
+
+
